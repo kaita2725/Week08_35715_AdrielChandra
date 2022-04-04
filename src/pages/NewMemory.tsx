@@ -10,7 +10,7 @@ import MemoriesContext from '../data/memories-context';
 
 const NewMemories: React.FC = () => {
     const [takenPhoto, setTakenPhoto] = useState<{
-      path: string;
+      path: string | undefined;
       preview: string;
     }>();
 
@@ -39,7 +39,7 @@ const NewMemories: React.FC = () => {
         directory: Directory.Data
       });
 
-      memoriesctx.addMemory(fileName, enteredTitle.toString(), chosenMemoryType);
+      memoriesctx.addMemory(fileName, base64, enteredTitle.toString(), chosenMemoryType);
       if(chosenMemoryType == 'good'){
         history.length > 0 ? history.goBack() : history.replace('/good-memories');
       }
@@ -58,7 +58,7 @@ const NewMemories: React.FC = () => {
       });
       console.log(photo);
 
-      if(!photo || !photo.path || !photo.webPath)
+      if(!photo || /* !photo.path || */ !photo.webPath)
       {
         return;
       }
